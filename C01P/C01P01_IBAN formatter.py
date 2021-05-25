@@ -1,5 +1,10 @@
 def iban_formatter(iban):
+    """" Taking into account that IBAN length is 22 symbols"""
     leveled_out_input = ''.join(iban.split(' '))
+
+    if len(leveled_out_input) != 22:
+        raise Exception('IBAN length is 22 symbols, please check your input !')
+
     substring = ''
     formatted_iban = ''
     counter = 0
