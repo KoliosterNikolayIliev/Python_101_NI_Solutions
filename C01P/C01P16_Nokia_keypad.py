@@ -1,14 +1,13 @@
 from collections import deque
 
+""""Sorry for the spaghetti code."""
 
-def next_letter(index):
-    index += 1
-    return index
+""" Part one - From number sequence to message """
 
 
-def wait(index):
-    index = 0
-    return index
+def next_key_check(sequence, key):
+    if key != '':
+        return sequence.appendleft(key)
 
 
 keys = {
@@ -39,25 +38,21 @@ def numbers_to_message(pressed_sequence):
             index += 1
             if index >= len(keys[key]):
                 index = 0
-            if next_key != '':
-                pressed_sequence.appendleft(next_key)
+            next_key_check(pressed_sequence, next_key)
             continue
         if key in keys:
             letter = keys[key][index]
-            if next_key != '':
-                pressed_sequence.appendleft(next_key)
+            next_key_check(pressed_sequence, next_key)
         if capitalised:
             letter = letter.upper()
         if key == -1:
             index = 0
             capitalised = False
-            if next_key != '':
-                pressed_sequence.appendleft(next_key)
+            next_key_check(pressed_sequence, next_key)
             continue
         if key == 1:
             capitalised = True
-            if next_key != '':
-                pressed_sequence.appendleft(next_key)
+            next_key_check(pressed_sequence, next_key)
             continue
 
         result += letter
@@ -66,20 +61,50 @@ def numbers_to_message(pressed_sequence):
     return result
 
 
-# There are some special rules:
-#
-#     If you press 1, the next letter is going to be capitalized
-#     If you press 0, this will insert a single white-space
-#     If you press a number and wait for a few seconds, the special breaking number -1 enters the sequence. This is the way to write different letters from only one keypad!
-#
-# Examples:
+tests = [
+    numbers_to_message([2, -1, 2, 2, -1, 2, 2, 2]) == "abc",
+    numbers_to_message([2, 2, 2, 2]) == "a",
+    numbers_to_message([1, 4, 4, 4, 8, 8, 8, 6, 6, 6, 0, 3, 3, 0, 1, 7, 7, 7, 7, 7, 2, 6, 6, 3, 2]) == "Ivo e Panda",
+]
 
-# tests = [
-#     numbers_to_message([2, -1, 2, 2, -1, 2, 2, 2]) == "abc",
-#     numbers_to_message([2, 2, 2, 2]) == "a",
-#     numbers_to_message([1, 4, 4, 4, 8, 8, 8, 6, 6, 6, 0, 3, 3, 0, 1, 7, 7, 7, 7, 7, 2, 6, 6, 3, 2]) == "Ivo e Panda",
-# ]
+for test in tests:
+    print(test)
 
-print(numbers_to_message([2, -1, 2, 2, -1, 2, 2, 2]))
-print(numbers_to_message([2, 2, 2, 2]))
-print(numbers_to_message([1, 4, 4, 4, 8, 8, 8, 6, 6, 6, 0, 3, 3, 0, 1, 7, 7, 7, 7, 7, 2, 6, 6, 3, 2]))
+""" Part two - From message to sequence"""
+
+
+def message_to_numbers(message):
+    message = deque([x for x in message])
+    sequence = []
+    while message:
+        symbol = message.popleft()
+        next_symbol = ''
+        if len(message) > 0:
+            next_symbol = message.popleft()
+        for key in keys:
+            if symbol.isupper():
+                sequence.append(1)
+                symbol = symbol.lower()
+            if symbol in keys[key]:
+                next_symbol_index = keys[key].index(symbol) + 1
+                if keys[key].index(symbol) == 0:
+                    sequence.append(key)
+                else:
+                    for i in range(next_symbol_index):
+                        sequence.append(key)
+                if next_symbol in keys[key]:
+                    sequence.append(-1)
+        if next_symbol != '':
+            message.appendleft(next_symbol)
+
+    return sequence
+
+
+tests_part_two = [
+    message_to_numbers("abc") == [2, -1, 2, 2, -1, 2, 2, 2],
+    message_to_numbers("a") == [2],
+    message_to_numbers("Ivo e Panda") == [1, 4, 4, 4, 8, 8, 8, 6, 6, 6, 0, 3, 3, 0, 1, 7, 2, 6, 6, 3, 2],
+    message_to_numbers("aabbcc") == [2, -1, 2, -1, 2, 2, -1, 2, 2, -1, 2, 2, 2, -1, 2, 2, 2]
+]
+for test in tests_part_two:
+    print(test)
