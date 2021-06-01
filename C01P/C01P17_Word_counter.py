@@ -3,7 +3,7 @@ def is_palindrome(string):
 
 
 def validate_index_and_check_letter(matrix, row, col, directions, direction):
-    # index validation needed
+
     row = row + directions[direction][0]
     col = col + directions[direction][1]
     if 0 <= row <= len(matrix) - 1 and 0 <= col <= len(matrix[0]) - 1:
