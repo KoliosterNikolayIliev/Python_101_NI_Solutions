@@ -6,11 +6,14 @@ def reduce_file_path(path):
         if path[index] == '..':
             path[index - 1] = ''
             path[index] = ''
+
         if path[index] == '.':
             path[index] = ''
+
     for symbol in path:
         if symbol != '':
             result.append(symbol)
+            
     result = '/' + '/'.join(result)
 
     return result
