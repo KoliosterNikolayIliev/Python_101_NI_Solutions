@@ -26,7 +26,7 @@ CINEMA_LAYOUT = [
     '***.*.**..'
 ]
 
-FRIENDS_CONFIGURATION = ["A", "BAA", "FRA", "CAB", "DRC", "EAD", "GLE"]
+FRIENDS_CONFIGURATION = ["GLE", "CAB", "BAA", "FRA", "DRC", "EAD", "A"]
 DIRECTIONS = {
     'AA': (-1, 0),
     'RA': (0, 1),
@@ -47,6 +47,7 @@ def stranger_forms(cinema_layout, friends_configuration):
             for sting in friends_configuration:
                 direction = ''
                 name = sting[0]
+
                 if len(sting) > 1:
                     direction = sting[1] + sting[2]
                 can_continue, result_row, result_col = check_if_possible(direction, (row, col), cinema_layout,
@@ -55,11 +56,14 @@ def stranger_forms(cinema_layout, friends_configuration):
                     cinema_layout = deepcopy(original)
                     successful = False
                     break
+
                 cinema_layout[result_row][result_col] = name
                 successful = True
+
             if successful:
                 result.append([''.join(x) for x in cinema_layout])
                 cinema_layout = deepcopy(original)
+
     return result
 
 
