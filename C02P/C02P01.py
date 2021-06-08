@@ -1,7 +1,7 @@
 def reduce_file_path(path):
     path = path.split('/')
     result = []
-    
+
     for index in range(len(path)):
         if path[index] == '..':
             path[index - 1] = ''
@@ -14,7 +14,6 @@ def reduce_file_path(path):
     result = '/' + '/'.join(result)
 
     return result
-
 
 
 tests = [
