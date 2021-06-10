@@ -13,7 +13,7 @@ def reduce_file_path(path):
     for symbol in path:
         if symbol != '':
             result.append(symbol)
-            
+
     result = '/' + '/'.join(result)
 
     return result
