@@ -32,7 +32,7 @@ def return_python_arguments(args):
 
 try:
     sys.stdout.write(f'{return_python_arguments(CMD_ARGS)}\n')
-except (KeyError, IndexError):
+except Exception:
     sys.stderr.write('Error: Property not found\n')
     sys.exit(1)
 
