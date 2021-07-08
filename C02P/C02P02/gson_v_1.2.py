@@ -36,6 +36,7 @@ except Exception:
     sys.stderr.write('Error: Property not found\n')
     sys.exit(1)
 
+
 # print(parse_path_to_list("members[0].powers[1]"))
 
 # $ python gson_v_1.0.py example.json "members[0].powers[1]"Heal Immunity > Turning tiny
