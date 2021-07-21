@@ -8,10 +8,13 @@ class Interval:
     def is_inside(self, value):
         if self.start_opened and self.end_opened:
             return self.start < value < self.end
+
         if self.start_opened:
             return self.start < value <= self.end
+
         if self.end_opened:
             return self.start <= value < self.end
+            
         return self.start <= value <= self.end
 
     def stringify(self):
@@ -31,34 +34,5 @@ class Interval:
         return self.stringify()
 
 
-closed_interval = Interval(1, 10)
-
-print(closed_interval.is_inside(1) is True)
-print(closed_interval.is_inside(5) is True)
-print(closed_interval.is_inside(10) is True)
-
-print(closed_interval.stringify() == "[1, 10]")
-
-closed_interval = Interval(1, 10, start_opened=True, end_opened=True)
-
-print(closed_interval.is_inside(1) is False)
-print(closed_interval.is_inside(5) is True)
-print(closed_interval.is_inside(10) is False)
-
-print(closed_interval.stringify() == "(1, 10)")
-
-half_opened_interval = Interval(1, 10, start_opened=False, end_opened=True)
-
-print(half_opened_interval.is_inside(1) is True)
-print(half_opened_interval.is_inside(5) is True)
-print(half_opened_interval.is_inside(10) is False)
-
-print(half_opened_interval.stringify() == "[1, 10)")
-
-half_opened_interval = Interval(1, 10, start_opened=True, end_opened=False)
-
-print(half_opened_interval.is_inside(1) is False)
-print(half_opened_interval.is_inside(5) is True)
-print(half_opened_interval.is_inside(10) is True)
-
-print(half_opened_interval.stringify() == "(1, 10]")
+# interval = Interval(1,10)
+# print(interval)
