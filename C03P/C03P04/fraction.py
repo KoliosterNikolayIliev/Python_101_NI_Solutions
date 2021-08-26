@@ -9,7 +9,7 @@ class Fraction:
         If denominator = 0, raise ValueError.
         """
         if denominator == 0:
-            raise ValueError
+            raise ValueError('Denominator can\'t be negative number')
 
         self.numerator = numerator
         self.denominator = denominator
@@ -37,9 +37,7 @@ class Fraction:
         """
         Returns True/False, if self is equal to other.
         """
-        if self.numerator == other.numerator and self.denominator == other.denominator:
-            return True
-        return False
+        return self.numerator == other.numerator and self.denominator == other.denominator
 
     def __add__(self, other):
         """
@@ -100,14 +98,7 @@ class Fraction:
         """
         Returns True/False, if self cannot be simplified further
         """
-        if self.gcd == 1 or self.numerator == 0:
-            return True
-        return False
+        return self.gcd == 1 or self.numerator == 0
 
     def __lt__(self, other):
-        if self.numerator / self.denominator < other.numerator / other.denominator:
-            return True
-        return False
-
-
-
+        return self.numerator / self.denominator < other.numerator / other.denominator
