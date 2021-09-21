@@ -62,3 +62,21 @@
 #         return 'not entered'
 #
 # print(printer())
+# b=1
+# a=f'str{b          }'
+# print(a)
+
+# def create_user(
+#     *,
+#     email: str,
+#     name: str
+# ) -> User:
+#     user = User(email=email)
+#     user.full_clean()
+#     user.save()
+#
+#     create_profile(user=user, name=name)
+#     send_confirmation_email(user=user)
+#
+#     return user
+
