@@ -7,6 +7,12 @@ class TemplateEngineError(Exception):
 
 
 class TemplateEngine:
+    """
+    Putting __matches and __variables as protected attributes in the constructor is:
+    a)bad (coupling)
+    b)irrelevant
+    c)not so bad
+    """
     def __init__(self, template):
         self.template = template
         self.__matches = re.findall('{\s*[a-zA-z]*\s*}', self.template)
