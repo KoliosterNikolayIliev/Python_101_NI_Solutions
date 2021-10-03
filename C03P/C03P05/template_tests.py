@@ -8,7 +8,7 @@ class TemplateEngineTests(unittest.TestCase):
     Should a TemplateError be raised if single curly brackets are used ("{} instead of {{}}")?
     """
 
-    def tests_TemplateEngine(self):
+    def tests_template_engine(self):
         with self.subTest('Single line even amount of whitespaces'):
             template = "Hello there, {{ x }}"
             engine = TemplateEngine(template)
